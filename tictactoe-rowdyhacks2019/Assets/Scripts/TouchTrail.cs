@@ -1,13 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO; // To manage files in directory
 
 public class TouchTrail : MonoBehaviour
 {
     [SerializeField] TrailRenderer trailPrefab;
     public TrailRenderer currentTrail;
     public bool inputRecieved = false;
-    // Update is called once per frame
+    public bool screenCapRecieved;
+    public GameObject userWrittenInput;
+
+    public string ScreenCapDirectory;
+    private void Start()
+    {
+        ScreenCapDirectory = Application.persistentDataPath + "/Assets/Screencaps";
+
+    }
     void Update() { 
         if (!inputRecieved && ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) || Input.GetMouseButton(0)) )
         {
@@ -39,6 +48,20 @@ public class TouchTrail : MonoBehaviour
         if ((Input.touchCount < 0 && Input.GetTouch(0).phase == TouchPhase.Ended )|| Input.GetMouseButtonUp(0))
         {
             inputRecieved = true;
+
+           
+        }
+    }
+
+
+
+    void OnGUI()
+    {
+        if (inputRecieved && !screenCapRecieved)
+        {
+            ScreenCapture.CaptureScreenshot("UserWrittenInput.png");
+            screenCapRecieved = true;
+            Debug.Log("Screen cap recieved and stored in: "  + ScreenCapDirectory);
         }
     }
 }
