@@ -7,19 +7,21 @@ public class TouchTrail : MonoBehaviour
 {
     [SerializeField] TrailRenderer trailPrefab;
     public TrailRenderer currentTrail;
-    public bool inputRecieved = false;
-    public bool screenCapRecieved;
     public GameObject userWrittenInput;
 
+    public bool inputRecieved = false;
+    public bool screenCapRecieved;
     public string ScreenCapDirectory;
+
     private void Start()
     {
-        ScreenCapDirectory = Application.persistentDataPath + "/Assets/Screencaps";
-
+        ScreenCapDirectory = Application.persistentDataPath;
     }
     void Update() { 
+        // If screen is being touched or mouse is held down  && user hasn't written any answers yet
         if (!inputRecieved && ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) || Input.GetMouseButton(0)) )
         {
+           
             Plane objPlane = new Plane(Camera.main.transform.forward * -1, this.transform.position);
             Ray nRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             float rayDistance;
@@ -48,8 +50,6 @@ public class TouchTrail : MonoBehaviour
         if ((Input.touchCount < 0 && Input.GetTouch(0).phase == TouchPhase.Ended )|| Input.GetMouseButtonUp(0))
         {
             inputRecieved = true;
-
-           
         }
     }
 
@@ -57,9 +57,10 @@ public class TouchTrail : MonoBehaviour
 
     void OnGUI()
     {
+        // Get Screenshot
         if (inputRecieved && !screenCapRecieved)
         {
-            ScreenCapture.CaptureScreenshot("UserWrittenInput.png");
+            ScreenCapture.CaptureScreenshot(ScreenCapDirectory+ "UserWrittenInput.png");
             screenCapRecieved = true;
             Debug.Log("Screen cap recieved and stored in: "  + ScreenCapDirectory);
         }
