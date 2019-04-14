@@ -15,7 +15,7 @@ public class TouchTrail : MonoBehaviour
 
     private void Start()
     {
-        ScreenCapDirectory = Application.persistentDataPath;
+        ScreenCapDirectory = Application.persistentDataPath + "/" ;
     }
     void Update() { 
         // If screen is being touched or mouse is held down  && user hasn't written any answers yet
@@ -60,9 +60,10 @@ public class TouchTrail : MonoBehaviour
         // Get Screenshot
         if (inputRecieved && !screenCapRecieved)
         {
-            ScreenCapture.CaptureScreenshot(ScreenCapDirectory+ "UserWrittenInput.png");
+            ScreenCapture.CaptureScreenshot(ScreenCapDirectory + "UserWrittenInput.png");
             screenCapRecieved = true;
             Debug.Log("Screen cap recieved and stored in: "  + ScreenCapDirectory);
+            //reference image with ScreenCapDirectory + "UserWrittenInput.png"
         }
     }
 }
