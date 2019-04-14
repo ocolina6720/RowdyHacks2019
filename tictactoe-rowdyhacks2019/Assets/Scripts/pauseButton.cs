@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class pauseButton : MonoBehaviour
 {
 
-    public 
+
     public void pauseScreen()
     {
         Time.timeScale = 0;
