@@ -8,7 +8,7 @@ public class TouchTrail : MonoBehaviour
     [SerializeField] TrailRenderer trailPrefab;
     public TrailRenderer currentTrail;
     public GameObject userWrittenInput;
-    Statemachine sm;
+
     public bool inputRecieved = false;
     public bool screenCapRecieved;
     public string ScreenCapDirectory;
@@ -16,43 +16,40 @@ public class TouchTrail : MonoBehaviour
     private void Start()
     {
         ScreenCapDirectory = Application.persistentDataPath + "/" ;
-        sm = FindObjectOfType<Statemachine>();
     }
-    void Update() {
+    void Update() { 
         // If screen is being touched or mouse is held down  && user hasn't written any answers yet
-        if(sm.gstate == Statemachine.gamestate.WAITINGFORANSWER){
-            if (!inputRecieved && ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) || Input.GetMouseButton(0)))
+        if (!inputRecieved && ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) || Input.GetMouseButton(0)) )
+        {
+           
+            Plane objPlane = new Plane(Camera.main.transform.forward * -1, this.transform.position);
+            Ray nRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            float rayDistance;
+            if (objPlane.Raycast(nRay, out rayDistance) )
             {
-
-                Plane objPlane = new Plane(Camera.main.transform.forward * -1, this.transform.position);
-                Ray nRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-                float rayDistance;
-                if (objPlane.Raycast(nRay, out rayDistance))
+                this.transform.position = nRay.GetPoint(rayDistance);
+                if (currentTrail == null)
                 {
-                    this.transform.position = nRay.GetPoint(rayDistance);
-                    if (currentTrail == null)
-                    {
-                        currentTrail = Instantiate(trailPrefab, nRay.GetPoint(rayDistance), Quaternion.identity);
-                    }
-                    else
-                    {
-                        currentTrail.transform.position = nRay.GetPoint(rayDistance);
-                    }
+                    currentTrail = Instantiate(trailPrefab, nRay.GetPoint(rayDistance), Quaternion.identity);
                 }
-
-            } else {
-
-                if (currentTrail != null) {
-                    currentTrail = null;
+                else
+                {
+                    currentTrail.transform.position = nRay.GetPoint(rayDistance);
                 }
-
+            }
+            
+        } else {
+            
+            if (currentTrail != null) {
+                currentTrail = null;
             }
 
+        }
 
-            if ((Input.touchCount < 0 && Input.GetTouch(0).phase == TouchPhase.Ended) || Input.GetMouseButtonUp(0))
-            {
-                inputRecieved = true;
-            }
+
+        if ((Input.touchCount < 0 && Input.GetTouch(0).phase == TouchPhase.Ended )|| Input.GetMouseButtonUp(0))
+        {
+            inputRecieved = true;
         }
     }
 

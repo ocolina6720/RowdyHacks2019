@@ -10,10 +10,8 @@ public class gameManager : MonoBehaviour{
     //Change the startTime if too long or too short
     public float startTime = 10;
     public float currentTime;
+    // look into player prefs to store highscores 
 
-    public Text question; // equation 
-    public Text TallyScore; // look into player prefs to store highscores 
-    
     // Start is called before the first frame update
     void Start(){
         currentTime = startTime;
@@ -29,8 +27,5 @@ public class gameManager : MonoBehaviour{
             currentTime = 0;
             counterText.color = Color.red;
         }
-
-
-        
     }
 }
