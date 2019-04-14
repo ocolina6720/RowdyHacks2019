@@ -7,8 +7,10 @@ public class gameManager : MonoBehaviour{
 
     public Text counterText;
 
-    public float startTime = 30;
+    //Change the startTime if too long or too short
+    public float startTime = 10;
     public float currentTime;
+
     // Start is called before the first frame update
     void Start(){
         currentTime = startTime;
