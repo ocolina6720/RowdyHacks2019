@@ -1417,6 +1417,7 @@ CanvasRenderer:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of e557cbe... Panels
 --- !u!1 &1123804211
@@ -1498,6 +1499,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1123804211}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> parent of b190cad... Added Panels
 =======
 >>>>>>> parent of b190cad... Added Panels
 --- !u!1 &1143252259
@@ -1960,6 +1963,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 1143252260}
   - {fileID: 818411263}
   - {fileID: 991780118}
@@ -1979,6 +1983,14 @@ RectTransform:
 >>>>>>> parent of b190cad... Added Panels
 =======
 >>>>>>> parent of e557cbe... Panels
+=======
+  - {fileID: 1846292389}
+  - {fileID: 1538716211}
+  - {fileID: 818411263}
+  - {fileID: 1799339844}
+  - {fileID: 2056063345}
+  - {fileID: 1143252260}
+>>>>>>> parent of b190cad... Added Panels
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
